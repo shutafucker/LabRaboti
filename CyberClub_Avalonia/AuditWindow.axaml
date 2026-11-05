@@ -1,0 +1,36 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="CyberClubApp.AuditWindow"
+        Title="Журнал аудита" Height="500" Width="900"
+        WindowStartupLocation="CenterOwner">
+    <Grid Margin="15" RowDefinitions="Auto,Auto,*">
+        <TextBlock Grid.Row="0" Text="Журнал действий"
+                   FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10" Spacing="10">
+            <TextBlock Text="Пользователь:" VerticalAlignment="Center"/>
+            <TextBox x:Name="TbFilterUser" Width="120" TextChanged="Filter_UserChanged"/>
+
+            <TextBlock Text="Таблица:" VerticalAlignment="Center"/>
+            <ComboBox x:Name="CbFilterTable" Width="130" SelectionChanged="Filter_TableChanged">
+                <ComboBoxItem Content="Все" IsSelected="True"/>
+                <ComboBoxItem Content="Computers"/>
+                <ComboBoxItem Content="Sessions"/>
+            </ComboBox>
+
+            <Button Content="Обновить" Click="BtnRefresh_Click"/>
+        </StackPanel>
+
+        <DataGrid x:Name="DgAudit" Grid.Row="2"
+                  AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="60"/>
+                <DataGridTextColumn Header="Когда" Binding="{Binding ChangedAtDisplay}" Width="140"/>
+                <DataGridTextColumn Header="Кто" Binding="{Binding ChangedBy}" Width="110"/>
+                <DataGridTextColumn Header="Таблица" Binding="{Binding TableName}" Width="110"/>
+                <DataGridTextColumn Header="Действие" Binding="{Binding Action}" Width="90"/>
+                <DataGridTextColumn Header="Данные" Binding="{Binding NewData}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

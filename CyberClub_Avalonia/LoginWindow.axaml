@@ -1,0 +1,30 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="CyberClubApp.LoginWindow"
+        Title="CyberArena — Вход" Height="300" Width="380"
+        WindowStartupLocation="CenterScreen"
+        CanResize="False">
+    <Grid Margin="30" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+        <TextBlock Grid.Row="0" Text="Вход в панель админа"
+                   FontSize="20" FontWeight="Bold" Margin="0,0,0,20"/>
+
+        <StackPanel Grid.Row="1" Margin="0,0,0,12">
+            <TextBlock Text="Логин" Margin="0,0,0,4"/>
+            <TextBox x:Name="TbUsername" Height="32" VerticalContentAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Margin="0,0,0,20">
+            <TextBlock Text="Пароль" Margin="0,0,0,4"/>
+            <TextBox x:Name="PbPassword" PasswordChar="*" Height="32" VerticalContentAlignment="Center"/>
+        </StackPanel>
+
+        <Button Grid.Row="3" Content="Войти" Height="36"
+                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                Click="BtnLogin_Click"/>
+
+        <TextBlock Grid.Row="4" x:Name="TbError"
+                   Foreground="Red" Margin="0,12,0,0"
+                   TextWrapping="Wrap" IsVisible="False"/>
+    </Grid>
+</Window>
+

@@ -1,0 +1,50 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="CyberClubApp.ReportsWindow"
+        Title="Отчёты CyberArena" Height="600" Width="1000"
+        WindowStartupLocation="CenterOwner">
+    <Grid Margin="15" RowDefinitions="Auto,Auto,Auto,*">
+        <TextBlock Grid.Row="0" Text="Отчёты"
+                   FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <!-- Фильтр периода -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10" Spacing="10">
+            <TextBlock Text="Период:" VerticalAlignment="Center"/>
+            <ComboBox x:Name="CbPeriod" Width="140" SelectionChanged="Period_Changed">
+                <ComboBoxItem Content="Сегодня" IsSelected="True"/>
+                <ComboBoxItem Content="Неделя"/>
+                <ComboBoxItem Content="Месяц"/>
+            </ComboBox>
+            <Button Content="Обновить" Click="BtnRefresh_Click"/>
+            <Button Content="Экспорт в CSV" Click="BtnExport_Click"/>
+        </StackPanel>
+
+        <!-- Сводка -->
+        <Border Grid.Row="2" Background="#F5F5F5" CornerRadius="4" Padding="12" Margin="0,0,0,10">
+            <TextBlock x:Name="TbSummary" FontSize="14" TextWrapping="Wrap"/>
+        </Border>
+
+        <!-- Таблицы -->
+        <Grid Grid.Row="3" ColumnDefinitions="*,10,*">
+            <DataGrid x:Name="DgTopPcs" Grid.Column="0"
+                      AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ПК" Binding="{Binding PcName}" Width="*"/>
+                    <DataGridCheckBoxColumn Header="VIP" Binding="{Binding IsVip}" Width="60"/>
+                    <DataGridTextColumn Header="Сессий" Binding="{Binding SessionCount}" Width="80"/>
+                    <DataGridTextColumn Header="Часов" Binding="{Binding TotalHours}" Width="80"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <DataGrid x:Name="DgDaily" Grid.Column="2"
+                      AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="День" Binding="{Binding DayDisplay}" Width="120"/>
+                    <DataGridTextColumn Header="Сессий" Binding="{Binding SessionCount}" Width="80"/>
+                    <DataGridTextColumn Header="Часов" Binding="{Binding TotalHours}" Width="80"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>
+

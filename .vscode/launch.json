@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Launch (CyberArena Avalonia)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/CyberClub_Avalonia/bin/Debug/net6.0/CyberClubApp.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CyberClub_Avalonia",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        }
+    ]
+}
+

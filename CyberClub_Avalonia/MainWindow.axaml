@@ -1,0 +1,69 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:CyberClubApp"
+        x:Class="CyberClubApp.MainWindow"
+        Title="CyberArena — панель админа" Height="620" Width="1100"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <local:BoolToStatusConverter x:Key="BoolToStatus"/>
+    </Window.Resources>
+
+    <Grid Margin="15" RowDefinitions="Auto,Auto,*,Auto">
+        <TextBlock Grid.Row="0" Text="CyberArena — панель админа"
+                   FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <!-- Фильтры -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10" Spacing="10">
+            <TextBlock Text="Поиск:" VerticalAlignment="Center"/>
+            <TextBox x:Name="TbSearch" Width="200" TextChanged="TbSearch_TextChanged"/>
+            <CheckBox x:Name="CbOnlyFree" Content="Только свободные"
+                      VerticalAlignment="Center" IsCheckedChanged="Filter_Changed"/>
+            <CheckBox x:Name="CbOnlyVip" Content="Только VIP"
+                      VerticalAlignment="Center" IsCheckedChanged="Filter_Changed"/>
+        </StackPanel>
+
+        <!-- Две таблицы -->
+        <Grid Grid.Row="2" ColumnDefinitions="*,6,*">
+            <DataGrid x:Name="DgComputers" Grid.Column="0"
+                      AutoGenerateColumns="False" IsReadOnly="True"
+                      SelectionMode="Single"
+                      SelectionChanged="DgComputers_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"/>
+                    <DataGridCheckBoxColumn Header="VIP" Binding="{Binding IsVip}" Width="60"/>
+                    <DataGridTextColumn Header="Статус" Width="90"
+                                        Binding="{Binding IsOccupied, Converter={StaticResource BoolToStatus}}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="#DDD"/>
+
+            <DataGrid x:Name="DgSessions" Grid.Column="2"
+                      AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Игрок" Binding="{Binding GamerName}" Width="*"/>
+                    <DataGridTextColumn Header="Начало" Binding="{Binding StartTimeDisplay}" Width="80"/>
+                    <DataGridTextColumn Header="Длится" Binding="{Binding DurationDisplay}" Width="80"/>
+                    <DataGridCheckBoxColumn Header="Активна" Binding="{Binding IsActive}" Width="70"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <!-- Действия -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10,0,0" Spacing="8">
+            <TextBlock Text="Игрок:" VerticalAlignment="Center"/>
+            <TextBox x:Name="TbGamerName" Width="180"/>
+            <Button x:Name="BtnSeat" Content="Посадить за выбранный ПК"
+                    Click="BtnSeat_Click"/>
+            <Button x:Name="BtnCloseSession" Content="Закрыть сессию"
+                    Click="BtnCloseSession_Click"/>
+            <Button Content="Журнал аудита" Click="BtnAudit_Click"/>
+            <Button Content="Отчёты" Click="BtnReports_Click"/>
+            <TextBlock x:Name="TbCurrentUser" VerticalAlignment="Center"
+                       Margin="15,0,5,0" FontStyle="Italic"/>
+            <Button Content="Выйти" Click="BtnLogout_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
+

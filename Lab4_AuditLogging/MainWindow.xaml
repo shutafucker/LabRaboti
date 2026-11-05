@@ -1,0 +1,88 @@
+<Window x:Class="CyberClubApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:CyberClubApp"
+        Title="CyberArena — панель админа" Height="620" Width="1100"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <local:BoolToStatusConverter x:Key="BoolToStatus"/>
+    </Window.Resources>
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>   <!-- заголовок -->
+            <RowDefinition Height="Auto"/>   <!-- фильтры -->
+            <RowDefinition Height="*"/>      <!-- две таблицы -->
+            <RowDefinition Height="Auto"/>   <!-- действия -->
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="CyberArena — панель админа"
+                   FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <!-- Фильтры -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="Поиск:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+            <TextBox x:Name="TbSearch" Width="200" Margin="0,0,16,0"
+                     TextChanged="TbSearch_TextChanged"/>
+            <CheckBox x:Name="CbOnlyFree" Content="Только свободные"
+                      VerticalAlignment="Center" Margin="0,0,16,0"
+                      Checked="Filter_Changed" Unchecked="Filter_Changed"/>
+            <CheckBox x:Name="CbOnlyVip" Content="Только VIP"
+                      VerticalAlignment="Center"
+                      Checked="Filter_Changed" Unchecked="Filter_Changed"/>
+        </StackPanel>
+
+        <!-- Две таблицы -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid x:Name="DgComputers" Grid.Column="0"
+                      AutoGenerateColumns="False" IsReadOnly="True"
+                      SelectionMode="Single"
+                      SelectionChanged="DgComputers_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="45"/>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"/>
+                    <DataGridCheckBoxColumn Header="VIP" Binding="{Binding IsVip}" Width="55"/>
+                    <DataGridTextColumn Header="Статус" Width="90"
+                                        Binding="{Binding IsOccupied, Converter={StaticResource BoolToStatus}}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"
+                          Background="#DDD"/>
+
+            <DataGrid x:Name="DgSessions" Grid.Column="2"
+                      AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Игрок" Binding="{Binding GamerName}" Width="*"/>
+                    <DataGridTextColumn Header="Начало"
+                                        Binding="{Binding StartTime, StringFormat='HH:mm'}" Width="70"/>
+                    <DataGridTextColumn Header="Длится" Width="80"
+                                        Binding="{Binding Duration, StringFormat='hh\\:mm'}"/>
+                    <DataGridCheckBoxColumn Header="Активна"
+                                            Binding="{Binding IsActive}" Width="70"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <!-- Действия -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10,0,0">
+            <TextBlock Text="Игрок:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+            <TextBox x:Name="TbGamerName" Width="180" Margin="0,0,10,0"/>
+            <Button x:Name="BtnSeat" Content="Посадить за выбранный ПК" Width="200"
+                    Click="BtnSeat_Click" Margin="0,0,10,0"/>
+            <Button x:Name="BtnCloseSession" Content="Закрыть сессию" Width="150"
+                    Click="BtnCloseSession_Click"/>
+            <Button Content="Журнал аудита" Width="120"
+                    Click="BtnAudit_Click" Margin="10,0,0,0"/>
+            <TextBlock x:Name="TbCurrentUser" VerticalAlignment="Center"
+                       Margin="20,0,10,0" FontStyle="Italic"/>
+            <Button Content="Выйти" Width="100" Click="BtnLogout_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
+

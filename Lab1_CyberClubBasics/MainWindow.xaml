@@ -1,0 +1,34 @@
+<Window x:Class="CyberClubApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CyberClub Admin Panel" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Text="Управление компьютерным клубом (Supabase + EF Core)"
+                   FontSize="18" FontWeight="Bold" Margin="0,0,0,15"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,15">
+            <Button Content="Загрузить ПК (Асинхронно)"
+                    Click="BtnLoad_Click" Width="200" Margin="0,0,10,0"/>
+            <Button Content="Добавить тестовый ПК"
+                    Click="BtnAdd_Click" Width="180"/>
+        </StackPanel>
+
+        <DataGrid x:Name="DgComputers" Grid.Row="2"
+                  AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Название ПК" Binding="{Binding Name}" Width="200"/>
+                <DataGridCheckBoxColumn Header="VIP место" Binding="{Binding IsVip}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
+

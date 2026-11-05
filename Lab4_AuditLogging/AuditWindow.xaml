@@ -1,0 +1,46 @@
+<Window x:Class="CyberClubApp.AuditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Журнал аудита" Height="500" Width="900"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Журнал действий"
+                   FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="Пользователь:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+            <TextBox x:Name="TbFilterUser" Width="120" Margin="0,0,16,0"
+                     TextChanged="Filter_Changed"/>
+
+            <TextBlock Text="Таблица:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+            <ComboBox x:Name="CbFilterTable" Width="120" Margin="0,0,16,0"
+                      SelectionChanged="Filter_Changed">
+                <ComboBoxItem Content="Все" IsSelected="True"/>
+                <ComboBoxItem Content="Computers"/>
+                <ComboBoxItem Content="Sessions"/>
+            </ComboBox>
+
+            <Button Content="Обновить" Width="100" Click="BtnRefresh_Click"/>
+        </StackPanel>
+
+        <DataGrid x:Name="DgAudit" Grid.Row="2"
+                  AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="60"/>
+                <DataGridTextColumn Header="Когда"
+                                    Binding="{Binding ChangedAt, StringFormat='dd.MM HH:mm:ss'}" Width="130"/>
+                <DataGridTextColumn Header="Кто" Binding="{Binding ChangedBy}" Width="100"/>
+                <DataGridTextColumn Header="Таблица" Binding="{Binding TableName}" Width="100"/>
+                <DataGridTextColumn Header="Действие" Binding="{Binding Action}" Width="80"/>
+                <DataGridTextColumn Header="Данные" Binding="{Binding NewData}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
+
