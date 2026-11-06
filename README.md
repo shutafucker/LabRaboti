@@ -392,6 +392,11 @@ dotnet run --project CyberClub_Avalonia/CyberClubApp.csproj
 2. В Solution Explorer кликните правой кнопкой мыши по нужному проекту (например, `Lab5_ReportsAndExport`) -> **«Назначить автозагружаемым проектом»**.
 3. Нажмите **F5**.
 
+### 📦 Автономные скомпилированные файлы (Single-File):
+В папке `publish/` подготовлены готовые единые исполняемые файлы (не требуют установки .NET на компьютере):
+* **Для Windows**: [`publish/windows-x64/CyberClubApp.exe`](file:///home/shuta/labi/publish/windows-x64/CyberClubApp.exe) (полный монолитный `.exe` со всеми зависимостями внутри).
+* **Для Linux**: [`publish/linux-x64/CyberClubApp`](file:///home/shuta/labi/publish/linux-x64/CyberClubApp) (запуск по `./publish/linux-x64/CyberClubApp`).
+
 ### Учетные данные для проверки:
 - **Администратор** (полный доступ): логин `admin`, пароль `admin123`
 - **Оператор** (режим чтения): логин `operator`, пароль `operator123`

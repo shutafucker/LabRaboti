@@ -1,0 +1,2 @@
+/home/shuta/labi/publish/windows-x64/CyberClubApp.pdb
+/home/shuta/labi/publish/windows-x64/CyberClubApp.exe

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "qwWVoUmaCdGmyXolQkvMCC1nOlMV6BS9+7TQAurPJDpfZcl4E7Yx9FtYlFt6c8R8a+9PyaUbmyGjgkWH8bWliA==",
+  "dgSpecHash": "qYwpqWcdXgRdfQpW4C9FeikVG+b3+04hHcmQm0EzpygG0eSd/2iTDyo3W43nLkPt+39J/nKGR8EtjS7mi93R6Q==",
   "success": true,
   "projectFilePath": "/home/shuta/labi/CyberClub_Avalonia/CyberClubApp.csproj",
   "expectedPackageFiles": [
@@ -54,7 +54,9 @@
     "/home/shuta/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "/home/shuta/.nuget/packages/tmds.dbus.protocol/0.15.0/tmds.dbus.protocol.0.15.0.nupkg.sha512",
     "/home/shuta/.nuget/packages/microsoft.netcore.app.ref/6.0.8/microsoft.netcore.app.ref.6.0.8.nupkg.sha512",
+    "/home/shuta/.nuget/packages/microsoft.netcore.app.runtime.linux-x64/6.0.8/microsoft.netcore.app.runtime.linux-x64.6.0.8.nupkg.sha512",
     "/home/shuta/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.8/microsoft.aspnetcore.app.ref.6.0.8.nupkg.sha512",
+    "/home/shuta/.nuget/packages/microsoft.aspnetcore.app.runtime.linux-x64/6.0.8/microsoft.aspnetcore.app.runtime.linux-x64.6.0.8.nupkg.sha512",
     "/home/shuta/.nuget/packages/microsoft.netcore.app.host.linux-x64/6.0.8/microsoft.netcore.app.host.linux-x64.6.0.8.nupkg.sha512"
   ],
   "logs": []

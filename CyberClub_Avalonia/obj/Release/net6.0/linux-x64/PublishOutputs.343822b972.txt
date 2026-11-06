@@ -1,0 +1,2 @@
+/home/shuta/labi/publish/linux-x64/CyberClubApp.pdb
+/home/shuta/labi/publish/linux-x64/CyberClubApp
