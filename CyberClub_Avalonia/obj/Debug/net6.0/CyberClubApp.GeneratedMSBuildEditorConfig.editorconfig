@@ -14,6 +14,9 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CyberClubApp
 build_property.ProjectDir = /home/shuta/labi/CyberClub_Avalonia/
 
+[/home/shuta/labi/CyberClub_Avalonia/AddComputerWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [/home/shuta/labi/CyberClub_Avalonia/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 

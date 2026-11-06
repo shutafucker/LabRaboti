@@ -41,6 +41,8 @@ namespace CyberClubApp
             bool isAdmin = string.Equals(_currentUser.Role, "Admin", StringComparison.OrdinalIgnoreCase);
             BtnSeat.IsEnabled = isAdmin;
             BtnCloseSession.IsEnabled = isAdmin;
+            BtnAddComputer.IsEnabled = isAdmin;
+            BtnDeleteComputer.IsEnabled = false;
 
             TbCurrentUser.Text = $"Вы вошли как: {_currentUser.Username} ({_currentUser.Role})";
         }
@@ -100,12 +102,66 @@ namespace CyberClubApp
         // ---------- ВЫБОР ПК → ПОКАЗ СЕССИЙ ----------
         private void DgComputers_SelectionChanged(object? sender, SelectionChangedEventArgs e)
         {
+            bool isAdmin = string.Equals(_currentUser.Role, "Admin", StringComparison.OrdinalIgnoreCase);
             if (DgComputers.SelectedItem is Computer pc)
+            {
                 DgSessions.ItemsSource = pc.Sessions
                     .OrderByDescending(s => s.StartTime)
                     .ToList();
+                BtnDeleteComputer.IsEnabled = isAdmin && !pc.IsOccupied;
+            }
             else
+            {
                 DgSessions.ItemsSource = null;
+                BtnDeleteComputer.IsEnabled = false;
+            }
+        }
+
+        // ---------- ДОБАВИТЬ ПК ----------
+        private async void BtnAddComputer_Click(object? sender, RoutedEventArgs e)
+        {
+            if (!string.Equals(_currentUser.Role, "Admin", StringComparison.OrdinalIgnoreCase))
+                return;
+
+            var dialog = new AddComputerWindow(_currentUser);
+            var newComputer = await dialog.ShowDialog<Computer?>(this);
+            if (newComputer != null)
+            {
+                await LoadComputersAsync();
+                SelectComputerById(newComputer.Id);
+            }
+        }
+
+        // ---------- УДАЛИТЬ ПК ----------
+        private async void BtnDeleteComputer_Click(object? sender, RoutedEventArgs e)
+        {
+            if (!string.Equals(_currentUser.Role, "Admin", StringComparison.OrdinalIgnoreCase))
+                return;
+
+            if (DgComputers.SelectedItem is not Computer pc)
+                return;
+
+            if (pc.IsOccupied)
+                return;
+
+            try
+            {
+                using var db = CreateDbContext();
+                var dbComp = await db.Computers.FindAsync(pc.Id);
+                if (dbComp != null)
+                {
+                    db.Computers.Remove(dbComp);
+                    await db.SaveChangesAsync();
+                }
+
+                await LoadComputersAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка удаления ПК: {ex.Message}");
+                _allComputers.Remove(pc);
+                ApplyFilters();
+            }
         }
 
         // ---------- ПОСАДИТЬ ИГРОКА ----------

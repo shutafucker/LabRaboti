@@ -1,0 +1,31 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="CyberClubApp.AddComputerWindow"
+        Title="Добавление компьютера" Height="280" Width="420"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False">
+    <Grid Margin="20" RowDefinitions="Auto,Auto,Auto,Auto,*,Auto">
+        <TextBlock Grid.Row="0" Text="Добавить новый компьютер"
+                   FontSize="18" FontWeight="Bold" Margin="0,0,0,15"/>
+
+        <StackPanel Grid.Row="1" Margin="0,0,0,12">
+            <TextBlock Text="Название компьютера:" Margin="0,0,0,5"/>
+            <TextBox x:Name="TbName" Watermark="Например: PC-05 или PC-05 (VIP)" Height="32" VerticalContentAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,10">
+            <CheckBox x:Name="CbIsVip" Content="VIP компьютер (зона повышенного комфорта)"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="3" x:Name="TbError"
+                   Foreground="Red" Margin="0,0,0,8"
+                   TextWrapping="Wrap" IsVisible="False"/>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
+            <Button Content="Отмена" Width="90" HorizontalContentAlignment="Center" Click="BtnCancel_Click"/>
+            <Button x:Name="BtnSave" Content="Добавить" Width="100" HorizontalContentAlignment="Center"
+                    Classes="accent" Click="BtnSave_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
+

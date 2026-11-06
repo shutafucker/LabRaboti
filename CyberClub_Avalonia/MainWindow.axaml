@@ -12,15 +12,24 @@
         <TextBlock Grid.Row="0" Text="CyberArena — панель админа"
                    FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
 
-        <!-- Фильтры -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10" Spacing="10">
-            <TextBlock Text="Поиск:" VerticalAlignment="Center"/>
-            <TextBox x:Name="TbSearch" Width="200" TextChanged="TbSearch_TextChanged"/>
-            <CheckBox x:Name="CbOnlyFree" Content="Только свободные"
-                      VerticalAlignment="Center" IsCheckedChanged="Filter_Changed"/>
-            <CheckBox x:Name="CbOnlyVip" Content="Только VIP"
-                      VerticalAlignment="Center" IsCheckedChanged="Filter_Changed"/>
-        </StackPanel>
+        <!-- Фильтры и управление ПК -->
+        <DockPanel Grid.Row="1" Margin="0,0,0,10" LastChildFill="False">
+            <StackPanel Orientation="Horizontal" Spacing="10" DockPanel.Dock="Left">
+                <TextBlock Text="Поиск:" VerticalAlignment="Center"/>
+                <TextBox x:Name="TbSearch" Width="200" TextChanged="TbSearch_TextChanged"/>
+                <CheckBox x:Name="CbOnlyFree" Content="Только свободные"
+                          VerticalAlignment="Center" IsCheckedChanged="Filter_Changed"/>
+                <CheckBox x:Name="CbOnlyVip" Content="Только VIP"
+                          VerticalAlignment="Center" IsCheckedChanged="Filter_Changed"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Spacing="8" DockPanel.Dock="Right">
+                <Button x:Name="BtnAddComputer" Content="+ Добавить ПК"
+                        Click="BtnAddComputer_Click" FontWeight="SemiBold"/>
+                <Button x:Name="BtnDeleteComputer" Content="Удалить ПК"
+                        Click="BtnDeleteComputer_Click"/>
+            </StackPanel>
+        </DockPanel>
 
         <!-- Две таблицы -->
         <Grid Grid.Row="2" ColumnDefinitions="*,6,*">
